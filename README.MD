@@ -12,3 +12,27 @@ framework. To convert the HTML page into a PDF file, we will use selenium, to ma
 functions from the
 [python-selenium-chrome-html-to-pdf-converter](https://github.com/maxvst/python-selenium-chrome-html-to-pdf-converter)
 repo.
+
+## Installation instructions
+
+1. Clone repository
+```bash
+git clone https://github.com/Adridot/cv_builder.git
+cd cv_builder
+```
+
+2. Install and activate a virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+3. Install the requirements
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the server 
+```bash
+python manage.py runserver
+```
