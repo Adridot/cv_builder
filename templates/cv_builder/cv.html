@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>CV</title>
-    <link rel="stylesheet" href="{% static '/cv_builder/cv.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Literata:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'cv.css' %}">
 </head>
 <body>
 <div class="container">
@@ -14,15 +18,15 @@
                 Adrien DIDOT
             </div>
             <div class="title_description">
-                Etudiant Ingénieur en Informatique,
-                spécialisé en Intelligence Artificielle (Bac +5)
-                A la recherche d’une alternance en Data Science
-                d’une durée de 12 mois à partir de Septembre 2022.
+                Etudiant Ingénieur en Informatique, <br>
+                spécialisé en <b>Intelligence Artificielle</b> (Bac +5) <br>
+                A la recherche d’une alternance en <b>Data Science</b> <br>
+                d’une durée de <b>12 mois</b> à partir de <b>Septembre 2022</b>.
             </div>
         </div>
         <div class="right">
             <div class="photo">
-                <img src="{% static '/cv_builder/adriendidot.jpg' %}" alt="", width="100">
+                <img src="{% static 'adriendidot.jpg' %}" alt="">
             </div>
         </div>
     </div>
@@ -35,28 +39,92 @@
                 <div class="part">
                     <div class="date_location">
                         Depuis 2021<br>
-                        Paris
                     </div>
                     <div class="part_main">
                         <div class="part_title">
                             Développeur web Freelance
                         </div>
-                        <div class="part_sub_title">
+                        <div class="part_subtitle">
                             adridot
                         </div>
                         <div class="part_body">
                             Différentes missions en développement web.<br>
-                            Gain d’expérience pour les technologies utilisées.<br>
-                            Découverte de la vie professionnelle d'entreprenariat, avec
+                            Gain d’<b>expérience</b> pour les technologies utilisées.<br>
+                            Découverte de la vie professionnelle d'<b>entreprenariat</b>, avec
                             des dates limites, ainsi que la gestion d’une petite entreprise.
                         </div>
                         <div class="part_elements">
-                            <div class="elements_title">
-                                Technologies :
-                            </div>
-                            <div class="elements_body">
-                                HTML/CSS/JS, Symfony, Bootstrap, Wordpress
-                            </div>
+                            <span class="elements_title">
+                                Technologies:&nbsp;
+                            </span>
+                            <span class="elements_body">
+                                Wordpress, <b>Symfony</b>, <b>Bootstrap</b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="part">
+                    <div class="date_location">
+                        Juin - Aout 2021<br>
+                        Paris
+                    </div>
+                    <div class="part_main">
+                        <div class="part_title">
+                            Stage en dévelopement web
+                        </div>
+                        <div class="part_subtitle">
+                            Tilak Healthcare
+                        </div>
+                        <div class="part_body">
+                            Développement d’applications web en équipe, tests qualité.
+                        </div>
+                        <div class="part_elements">
+                            <span class="elements_title">
+                                Technologies:&nbsp;
+                            </span>
+                            <span class="elements_body">
+                                PHP Symfony, Github
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="title">
+                    Formation
+                </div>
+                <div class="part">
+                    <div class="date_location">
+                        2020 - 2023<br>
+                        Pau & Cergy
+                    </div>
+                    <div class="part_main">
+                        <div class="part_title">
+                            Diplôme d'ingénieur en informatique
+                        </div>
+                        <div class="part_subtitle">
+                            CY Tech (ex EISTI)
+                        </div>
+                        <div class="part_body">
+                            Option Intelligence Artificielle
+                        </div>
+                    </div>
+                </div>
+                <div class="part">
+                    <div class="date_location">
+                        Fevrier - Juin 2022<br>
+                        Tartu, Estonie
+                    </div>
+                    <div class="part_main">
+                        <div class="part_title">
+                            Mobilité Mathématique & Informatique
+                        </div>
+                        <div class="part_subtitle">
+                            University of Tartu
+                        </div>
+                        <div class="part_body">
+                            Neural networks, Big data management, Machine translation, Data science for urban mobility,
+                            Computer programming, Business data analytics
                         </div>
                     </div>
                 </div>
@@ -65,21 +133,23 @@
         <div class="right">
             <div class="section">
                 <div class="title">
-                    Expérience professionnelle
+                    Coordonnées
                 </div>
                 <div class="part">
-                    37 rue Rémy Dumoncel <br>
-                    77210, Avon <br>
-                    +33 6 68 40 87 71 <br>
-                    adrien.didot@gmail.com <br>
-                    <br>
-                    LinkedIn: @adriendidot <br>
-                    <br>
-                    22/06/2000 (21 ans) <br>
-                    Permis B <br>
+                    <div class="address">
+                        37 rue Rémy Dumoncel <br>
+                        77210, Avon
+                    </div>
+                    <div class="phone_number"><a href="tel:+33668408771">+33 6 68 40 87 71</a></div>
+                    <div class="email"><a href="mailto:adrien.didot@gmail.com ">adrien.didot@gmail.com </a></div>
+                    <div class="website_link">LinkedIn: @<u><a href="https://linkedin.com/in/adriendidot"
+                                                               target="_blank">adriendidot</a></u></div>
+                    <div class="other">
+                        22/06/2000 (21 ans) <br>
+                        Permis B
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
