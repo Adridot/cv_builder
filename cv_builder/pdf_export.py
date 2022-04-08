@@ -24,7 +24,7 @@ def get_pdf_from_html(path, print_options={}):
 
     driver.get(path)
 
-    time.sleep(0.3)
+    time.sleep(1)
 
     calculated_print_options = {
         'landscape': False,
