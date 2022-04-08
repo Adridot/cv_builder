@@ -24,7 +24,7 @@ def get_pdf_from_html(path, print_options={}):
 
     driver.get(path)
 
-    time.sleep(1)
+    time.sleep(1) # timeout to load page, and be sure that all CSS and fonts are loading. (1 sec)
 
     calculated_print_options = {
         'landscape': False,
