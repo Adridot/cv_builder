@@ -1,5 +1,7 @@
+import os
 import time
 
+from django.http import HttpResponse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -24,15 +26,35 @@ def get_pdf_from_html(path, print_options={}):
 
     driver.get(path)
 
-    time.sleep(1) # timeout to load page, and be sure that all CSS and fonts are loading. (1 sec)
+    time.sleep(1)  # timeout to load page, and be sure that all CSS and fonts are loading. (1 sec)
 
     calculated_print_options = {
         'landscape': False,
         'displayHeaderFooter': False,
         'printBackground': True,
         'preferCSSPageSize': True,
+        'pageRanges': '1',
+        # 'scale': 0.99,
+
     }
     calculated_print_options.update(print_options)
     result = send_devtools(driver, "Page.printToPDF", calculated_print_options)
     driver.quit()
     return base64.b64decode(result['data'])
+
+
+def save_pdf_to_file(pdf_data, output_filename):
+    os.makedirs(os.path.dirname(output_filename), exist_ok=True)  # create directory if not exists
+    # Save the file
+    with open(output_filename, 'wb') as pdf_file:
+        pdf_file.write(pdf_data)
+
+
+def open_file_in_browser(output_filename):
+    # Open file in browser
+    # 'rb' (read binary), because the pdf is in binary format
+    with open(output_filename, 'rb') as pdf_file:
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        # TODO: add filename
+        response['Content-Disposition'] = 'filename="home_page.pdf"'
+    return response
