@@ -1,5 +1,11 @@
+import json
+
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from cv_builder.modules.pdf_export import save_pdf_to_file, get_pdf_from_html, open_file_in_browser
+import logging
 
 dev_freelance_adridot = {
     'title': "Développeur web Freelance",
@@ -169,7 +175,7 @@ header = {
     'name': "Adrien DIDOT",
     'description': "Etudiant Ingénieur en Informatique, <br>"
                    "spécialisé en <b>Intelligence Artificielle</b> (Bac +5) <br>"
-                   "A la recherche d’une alternance en <b>Data Science</b> <br>"
+                   "A la recherche d’une alternance en <b>Intelligence Artificielle</b> <br>"
                    "d’une durée de <b>12 mois</b> à partir de <b>Septembre 2022</b>.",
     'picture': "cv_builder/template_1/adriendidot.jpg",
 }
@@ -187,8 +193,14 @@ def index(request):
     return render(request, 'cv_builder/template_1/index.html')
 
 
+@csrf_exempt
 def display_cv(request):
     global context
+    if request.method == 'POST':
+        context = json.loads(request.body)
+        logging.error(context)
+        render(request, 'cv_builder/template_1/index.html', context)
+        return context
     return render(request, 'cv_builder/template_1/cv.html', context)
 
 
