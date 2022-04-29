@@ -15,6 +15,8 @@ repo.
 
 ## Installation instructions
 
+### Installing the back-end (Python Django)
+
 1. Clone repository
 ```bash
 git clone https://github.com/Adridot/cv_builder.git
@@ -36,3 +38,28 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 ```
+
+### Installing the front-end (ReactJS)
+
+1. Go the the frontend directory
+```bash
+cd frontend
+```
+
+2. Install the dependencies
+```bash
+npm install
+```
+
+3. Run the server
+```bash
+npm start
+```
+
+### Opening the websites
+
+1. Open the back-end website:
+http://localhost:8000/
+
+2. Open the front-end website:
+http://localhost:3000/
