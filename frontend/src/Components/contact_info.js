@@ -3,15 +3,18 @@ import {Box, Button, TextField} from "@mui/material";
 import CvContext from "./contexts/cv_context";
 
 
+//The component containing contact information
 export default function ContactInfo() {
 
     const [cv, setCv] = useContext(CvContext);
 
+    //The variables for a single website.
     const [web_site, setWebSite] = useState({
-        name: "",
-        text: "",
-        url: ""
+        name: "", //The name of the website (ex:LinkedIn)
+        text: "", //The text to replace the URL with (ex: @johndoe)
+        url: "" //The url of the website (ex: https://www.linkedin.com/in/johndoe)
     });
+    //A function to add a website to the cv JSON
     const addWebSite = () => {
         setContactInfo({
             ...contact_info, websites:
@@ -24,12 +27,14 @@ export default function ContactInfo() {
             name: "", text: "", url: ""
         });
     };
+    //A function to remove the last added website from the cv JSON
     const removeLastWebSite = () => {
         setContactInfo({
             ...contact_info,
             websites: contact_info.websites.slice(0, -1)
         });
     };
+    //A function to clear all websites from the cv JSON
     const clearWebSites = () => {
         setContactInfo({
             ...contact_info,
@@ -37,6 +42,7 @@ export default function ContactInfo() {
         });
     };
 
+    //The variable containing all contact information
     const [contact_info, _setContactInfo] = useState({
         email: "",
         phone: "",
@@ -44,6 +50,7 @@ export default function ContactInfo() {
         websites: [],
         other: ""
     });
+    //The function to set the contact information, and to update the cv JSON
     const setContactInfo = (contact_info) => {
         _setContactInfo(contact_info);
         setCv({...cv, contact_info: contact_info})

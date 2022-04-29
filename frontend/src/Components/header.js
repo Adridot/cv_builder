@@ -3,6 +3,7 @@ import {Box, TextField} from "@mui/material";
 import CvContext from "./contexts/cv_context";
 
 
+//The header component, to build the header of the CV
 export default function Header() {
 
     const [cv, setCv] = useContext(CvContext);

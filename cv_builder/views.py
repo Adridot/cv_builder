@@ -1,12 +1,7 @@
-import json
-
-from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-
 from cv_builder.modules.pdf_export import save_pdf_to_file, get_pdf_from_html, open_file_in_browser
-import logging
 
+# This whole part is temporary and will be removed when the frontend is ready
 dev_freelance_adridot = {
     'title': "Développeur web Freelance",
     'sub_title': "",
@@ -189,21 +184,18 @@ context = {
 }
 
 
+# This view is to display the index, to choose between showing the CV and exporting it into a pdf
 def index(request):
     return render(request, 'cv_builder/template_1/index.html')
 
 
-@csrf_exempt
+# This view is to display the CV
 def display_cv(request):
     global context
-    if request.method == 'POST':
-        context = json.loads(request.body)
-        logging.error(context)
-        render(request, 'cv_builder/template_1/index.html', context)
-        return context
     return render(request, 'cv_builder/template_1/cv.html', context)
 
 
+# This view is to export the CV into a pdf
 def export_to_pdf(request):
     url = request.build_absolute_uri('/display_cv')  # Getting the full url of the CV
     output_filename = 'media/exported_cv/cv.pdf'  # The path to the output file
