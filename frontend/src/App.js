@@ -83,7 +83,7 @@ function App() {
                             <TableCell>{cv.id}</TableCell>
                             <TableCell>{cv.name}</TableCell>
                             <TableCell><Button
-                                startIcon={<DeleteIcon />}
+                                startIcon={<DeleteIcon/>}
                                 onClick={() => remove_cv(cv.id)}>
                                 Remove</Button>
                             </TableCell>

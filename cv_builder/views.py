@@ -1,13 +1,14 @@
-import json, ast
+import ast
+import json
 
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.decorators.csrf import csrf_exempt
 
-from cv_builder.modules.pdf_export import save_pdf_to_file, get_pdf_from_html, open_file_in_browser
 from cv_builder.models import CV
+from cv_builder.modules.pdf_export import save_pdf_to_file, get_pdf_from_html
 from project_config import settings
 
 cv_json = {}
