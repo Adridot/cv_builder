@@ -28,9 +28,9 @@ def display_cv(request):
 def export_to_pdf(request):
     global cv_json
     url = request.build_absolute_uri('/display_cv')  # Getting the full url of the CV
-    output_filename = f"cv_builder/static/cv_builder/exported_cv/{cv_json['name']}.pdf"  # The path to the output file
+    output_filename = f"cv_builder/exported_cv/{cv_json['name']}.pdf"  # The path to the output file
     pdf_data = get_pdf_from_html(url)  # Converting HTML to PDF
-    save_pdf_to_file(pdf_data, output_filename)  # Saving the PDF
+    save_pdf_to_file(pdf_data, 'cv_builder/static/' + output_filename)  # Saving the PDF
     return output_filename
 
 
@@ -51,7 +51,7 @@ def create_cv(request):
 # View to delete a CV from the database
 @csrf_exempt
 def delete_cv(request):
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         json_data = json.loads(request.body)
         try:
             CV.objects.filter(id=json_data["id"]).delete()  # Deleting the CV from the database
@@ -68,8 +68,8 @@ def list_cvs(request):
         cvs = CV.objects.all()  # Getting all the CVs from the database
         cvs_json = []  # Creating a list to store the CVs
         for cv in cvs:  # Iterating over the CVs
-            cvs_json.append({"name": cv.name, "json": cv.json})  # Adding the CVs to the list
-        return HttpResponse(json.dumps(cvs_json), content_type="application/json")  # Returning the list
+            cvs_json.append({"id": cv.id, "name": cv.name, "json": cv.json})  # Adding the CVs to the list
+        return HttpResponse(json.dumps(cvs_json), content_type="application/json", status=200)  # Returning the list
     return HttpResponse(status=405)
 
 
@@ -77,14 +77,14 @@ def list_cvs(request):
 @csrf_exempt
 def create_pdf(request):
     global cv_json
-    if request.method == 'GET':
+    if request.method == 'POST':
         json_data = json.loads(request.body)  # Getting the json data
-        try:
-            cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
-            cv_json = serializers.serialize('json', [cv_data])  # Setting the global variable
-            cv_json = ast.literal_eval(cv_json)[0]['fields']  # Converting the json to a dictionary
-            filepath = export_to_pdf(request)  # Exporting the CV to a PDF
-            return HttpResponse(str(settings.BASE_DIR) + '/' + filepath)  # Returning the url of the PDF
-        except:
-            return HttpResponse("This CV does not exist.", status=400)
+        # try:
+        cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
+        cv_json = serializers.serialize('json', [cv_data])  # Setting the global variable
+        cv_json = ast.literal_eval(cv_json)[0]['fields']  # Converting the json to a dictionary
+        filepath = export_to_pdf(request)  # Exporting the CV to a PDF
+        return HttpResponse(settings.STATIC_URL + filepath)  # Returning the url of the PDF
+        # except:
+        #     return HttpResponse("This CV does not exist.", status=400)
     return HttpResponse(status=405)
