@@ -1,3 +1,4 @@
 .idea
 cv_builder/media
 venv
+*.pdf
