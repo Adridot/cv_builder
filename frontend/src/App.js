@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Button, TableCell, TableRow, Table, TableBody, TableHead, Backdrop, CircularProgress} from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Editor from './components/Editor';
 
 
 function App() {
