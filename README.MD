@@ -56,10 +56,7 @@ npm install
 npm start
 ```
 
-### Opening the websites
+### Using the app
 
-1. Open the back-end website:
-http://localhost:8000/
+Open the front-end website (http://localhost:3000/), and start creating a CV !
 
-2. Open the front-end website:
-http://localhost:3000/

@@ -18,6 +18,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
+import ClearIcon from '@mui/icons-material/Clear';
 import {JsonEditor as Editor} from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
@@ -231,7 +232,7 @@ function App() {
                             cv_list.length === 0 ?
                                 <TableCell colspan={3} align={"center"}>
                                     <Typography variant={'h5'} align={'center'}>
-                                        No CV's found.
+                                        No CVs found.
                                     </Typography>
                                 </TableCell>
                                 :
@@ -304,7 +305,7 @@ function App() {
                         {/*simple button to clear the json, and hide the editor*/}
                         <Button
                             variant={"contained"}
-                            startIcon={<DeleteIcon/>}
+                            startIcon={<ClearIcon/>}
                             onClick={() => {
                                 setHiddenAdd(true)
                                 setCvJson(defaultJSON)
@@ -353,7 +354,7 @@ function App() {
                         </Button>
                         <Button
                             variant={"contained"}
-                            startIcon={<DeleteIcon/>}
+                            startIcon={<ClearIcon/>}
                             onClick={() => {
                                 setHiddenEdit(true)
                                 setCvJson(defaultJSON)

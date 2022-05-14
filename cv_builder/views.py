@@ -98,7 +98,7 @@ def update_cv(request):
         json_data = json.loads(request.body)  # Getting the json data
         try:
             cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
-            cv_data.name = json_data["name"] # Updating the CV in the database
+            cv_data.name = json_data["name"]  # Updating the CV in the database
             cv_data.json = json_data["json"]
             cv_data.save()  # Saving the CV
             return HttpResponse(status=200)
