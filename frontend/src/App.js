@@ -26,6 +26,7 @@ function App() {
 
     const api_url = "http://127.0.0.1:8000/"; // api url
 
+    // default json to create a new cv
     const defaultJSON = {
         name: "",
         json: {
@@ -59,6 +60,7 @@ function App() {
         get_cv_list();
     }, []);
 
+    // The two following functions are to prevent from having two json editors at the same time.
     const setHiddenEdit = (value) => {
         if (value === false) {
             _setHiddenEdit(false);
@@ -176,6 +178,13 @@ function App() {
 
     return (
         <Container>
+            {/*This is the loading indicator to display when the CV is being converted into a PDF*/}
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
             <Typography variant={'h3'} align={'center'}>CV Builder</Typography>
             <Typography
                 sx={{m: '1rem', fontStyle: 'italic'}}
@@ -187,6 +196,7 @@ function App() {
                 display={'flex'}
                 justifyContent={'flex-end'}
             >
+                {/*When clicking on the Add button, we set the default CV and display the editor*/}
                 <Button
                     variant={'contained'}
                     color={'info'}
@@ -217,48 +227,45 @@ function App() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cv_list.length === 0 ?
-                            <TableCell colspan={3} align={"center"}>
-                                <Typography variant={'h5'} align={'center'}>
-                                    No CV's found.
-                                </Typography>
-                            </TableCell> :
-                            cv_list.map(cv => (<TableRow key={cv.id}>
-                                <TableCell>{cv.id}</TableCell>
-                                <TableCell>{cv.name}</TableCell>
-                                <TableCell align={'center'}>
-                                    <Button
-                                        startIcon={<EditIcon/>}
-                                        onClick={() => {
-                                            edit_cv(cv.id);
-                                        }}>
-                                        Edit</Button>
+                        {// If there are no CVs in the database, we display a message in the table
+                            cv_list.length === 0 ?
+                                <TableCell colspan={3} align={"center"}>
+                                    <Typography variant={'h5'} align={'center'}>
+                                        No CV's found.
+                                    </Typography>
                                 </TableCell>
-                                <TableCell align={'center'}>
-                                    <Button
-                                        startIcon={<DeleteIcon/>}
-                                        onClick={() => remove_cv(cv.id)}>
-                                        Remove</Button>
-                                </TableCell>
-                                <TableCell align={'center'}>
-                                    <Button
-                                        startIcon={<DownloadIcon/>}
-                                        onClick={() => get_cv_path(cv.id)}>
-                                        Download</Button>
-                                </TableCell>
-                            </TableRow>))
+                                :
+                                // Cycling through the list of CVs and displaying them in the table
+                                cv_list.map(cv => (<TableRow key={cv.id}>
+                                    <TableCell>{cv.id}</TableCell>
+                                    <TableCell>{cv.name}</TableCell>
+                                    <TableCell align={'center'}>
+                                        <Button
+                                            startIcon={<EditIcon/>}
+                                            onClick={() => {
+                                                edit_cv(cv.id);
+                                            }}>
+                                            Edit</Button>
+                                    </TableCell>
+                                    <TableCell align={'center'}>
+                                        <Button
+                                            startIcon={<DeleteIcon/>}
+                                            onClick={() => remove_cv(cv.id)}>
+                                            Remove</Button>
+                                    </TableCell>
+                                    <TableCell align={'center'}>
+                                        <Button
+                                            startIcon={<DownloadIcon/>}
+                                            onClick={() => get_cv_path(cv.id)}>
+                                            Download</Button>
+                                    </TableCell>
+                                </TableRow>))
                         }
-
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Backdrop
-                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading}
-            >
-                <CircularProgress color="inherit"/>
-            </Backdrop>
-            {!hidden_add ?
+            {// The json editor that displays to add a new CV
+                !hidden_add ?
                 <Box sx={{mt: '3rem'}}>
                     <Typography
                         sx={{m: '1rem'}}
@@ -270,7 +277,7 @@ function App() {
                         value={cv_json}
                         onChange={setCvJson}
                         history
-                        mode={Editor.modes.tree}
+                        mode={Editor.modes.code}
                         navigationBar={false}
                     />
                     <Box
@@ -281,6 +288,8 @@ function App() {
                             marginTop: '2rem'
                         }}
                     >
+                        {/*When we want to save a new CV, and add it to the database,
+                        we send the created json with the create_cv function, and hide the json editor*/}
                         <Button
                             variant={"contained"}
                             startIcon={<SaveIcon/>}
@@ -292,6 +301,7 @@ function App() {
                             style={{width: '40%'}}>
                             Save
                         </Button>
+                        {/*simple button to clear the json, and hide the editor*/}
                         <Button
                             variant={"contained"}
                             startIcon={<DeleteIcon/>}
@@ -305,6 +315,8 @@ function App() {
                         </Button>
                     </Box>
                 </Box> : null}
+            {/*More or less same part as the previous one, but with editing, so we are sending
+            an edit request to the API.*/}
             {!hidden_edit ?
                 <Box sx={{mt: '3rem'}}>
                     <Typography

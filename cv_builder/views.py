@@ -31,7 +31,7 @@ def export_to_pdf(request):
     url = request.build_absolute_uri('/display_cv')  # Getting the full url of the CV
     output_filename = f"cv_builder/exported_cv/{cv_json['name']}.pdf"  # The path to the output file
     pdf_data = get_pdf_from_html(url)  # Converting HTML to PDF
-    save_pdf_to_file(pdf_data, 'cv_builder/static/' + output_filename)  # Saving the PDF
+    save_pdf_to_file(pdf_data, 'cv_builder/static/' + output_filename)  # Saving the PDF in the project static folder
     return output_filename
 
 
@@ -80,14 +80,14 @@ def create_pdf(request):
     global cv_json
     if request.method == 'POST':
         json_data = json.loads(request.body)  # Getting the json data
-        # try:
-        cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
-        cv_json = serializers.serialize('json', [cv_data])  # Setting the global variable
-        cv_json = ast.literal_eval(cv_json)[0]['fields']  # Converting the json to a dictionary
-        filepath = export_to_pdf(request)  # Exporting the CV to a PDF
-        return HttpResponse(settings.STATIC_URL + filepath)  # Returning the url of the PDF
-        # except:
-        #     return HttpResponse("This CV does not exist.", status=400)
+        try:
+            cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
+            cv_json = serializers.serialize('json', [cv_data])  # Setting the global variable
+            cv_json = ast.literal_eval(cv_json)[0]['fields']  # Converting the json to a dictionary
+            filepath = export_to_pdf(request)  # Exporting the CV to a PDF
+            return HttpResponse(settings.STATIC_URL + filepath)  # Returning the url of the PDF
+        except:
+            return HttpResponse("This CV does not exist.", status=400)
     return HttpResponse(status=405)
 
 
@@ -98,8 +98,8 @@ def update_cv(request):
         json_data = json.loads(request.body)  # Getting the json data
         try:
             cv_data = CV.objects.get(id=json_data["id"])  # Getting the CV from the database
-            cv_data.name = json_data["name"]
-            cv_data.json = json_data["json"]  # Updating the CV in the database
+            cv_data.name = json_data["name"] # Updating the CV in the database
+            cv_data.json = json_data["json"]
             cv_data.save()  # Saving the CV
             return HttpResponse(status=200)
         except MultiValueDictKeyError:
