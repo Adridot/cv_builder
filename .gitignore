@@ -1,5 +1,4 @@
 .idea
-cv_builder/media
 static
 venv
 *.pdf
