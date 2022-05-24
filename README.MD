@@ -27,6 +27,8 @@ cd cv_builder
 
 2. Install and activate a virtual environment
 
+_**WARNING:** you will need to use a python version **>= 3.8**_
+
 ```bash
 python -m venv venv
 source venv/bin/activate
@@ -61,7 +63,7 @@ cd frontend
 2. Install the dependencies
 
 ```bash
-npm install
+npm install --force
 ```
 
 3. Run the server
