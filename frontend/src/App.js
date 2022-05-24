@@ -49,11 +49,11 @@ function App() {
         }
     }
 
-    const [cv_list, setCvList] = useState([]); // list of cvs fetched from the database
-    const [hidden_edit, _setHiddenEdit] = useState(true); // state to hide the json editor
-    const [hidden_add, _setHiddenAdd] = useState(true); // state to hide the json editor
-    const [cv_json, setCvJson] = useState(defaultJSON); // state to hold the json of a cv
-    const [loading, setLoading] = React.useState(false); // state to show the loading indicator
+    const [cv_list, setCvList] = useState([]);              // list of cvs fetched from the database
+    const [hidden_edit, _setHiddenEdit] = useState(true);   // state to hide the json editor
+    const [hidden_add, _setHiddenAdd] = useState(true);     // state to hide the json editor
+    const [cv_json, setCvJson] = useState(defaultJSON);                 // state to hold the json of a cv
+    const [loading, setLoading] = React.useState(false);    // state to show the loading indicator
 
 
     // useEffect is called when the component is mounted, to automatically get the CV list.
@@ -159,7 +159,6 @@ function App() {
         await window.open(api_url + data.slice(1), '_blank');
         setLoading(false);
     }
-
 
     // This function opens the editor to edit a CV JSON
     const edit_cv = (id) => {
